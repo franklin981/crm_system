@@ -13,6 +13,7 @@ envVars.txt
 .nyc_output
 .vscode-test
 __pycache__
+NOTES
 npm-debug.log
 **/.mypy_cache/**
 !yarn.lock
