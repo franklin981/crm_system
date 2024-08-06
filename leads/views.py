@@ -4,12 +4,18 @@ from .models import Agent, Lead
 # Create your views here.
 
 
-def homepage(request):
+def lead_list(request):
     leads = Lead.objects.all()
+    agents = Agent.objects.all()
     context = {
-        leads: "leads"
+        "leads": leads,
+        "agents": agents,
     }
-    return render(request, 'leads/home.html', context)
+    return render(request, 'leads/lead_home.html', context)
 
-def feedback(request):
-    return render(request, 'next.html')
+def lead_detail(request, pk):
+    lead = Lead.objects.get(id=pk)
+    context = {
+        "lead": lead
+    }
+    return render(request, 'leads/lead_details.html', context)
