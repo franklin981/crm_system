@@ -19,7 +19,7 @@
     <h1> This is all our leads </h1>
     {% for lead in leads %}
     <div class="leads">
-       <a href="/leads/lead_detail/{{lead.pk}}/"> {{lead.first_name}} {{lead.last_name}} </a> {{lead.agent}}
+       <a href="/leads/lead_detail/{{lead.pk}}/"> {{lead.first_name}} {{lead.last_name}} </a>
     </div>
     {% endfor %}
 
@@ -29,5 +29,10 @@
         {{agent}}
     </div>
     {% endfor %}
+
+    <hr>
+    <div class="create_lead">
+        <a href="/leads/lead_create">Create New Lead</a>
+    </div>
 </body>
 </html>
