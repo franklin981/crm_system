@@ -7,10 +7,9 @@ from .forms import LeadForm, LeadModelForm
 
 def lead_list(request):
     leads = Lead.objects.all()
-    agents = Agent.objects.all()
+
     context = {
         "leads": leads,
-        "agents": agents,
     }
     return render(request, 'leads/lead_home.html', context)
 
@@ -121,4 +120,7 @@ def lead_update(request, pk):
 #         "lead": lead
 #     }
 #     return render(request, 'leads/lead_update.html', context)
-def lead_delete
+def lead_delete(request, pk):
+    lead = Lead.objects.get(id=pk)
+    lead.delete()
+    return redirect('/leads/lead_list')

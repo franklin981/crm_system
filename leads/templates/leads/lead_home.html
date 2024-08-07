@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Lead project</title>
 
-    <style>
-        .leads{
-            padding: 10px, 6px;
-            margin-top: 6px;
-            background-color: #f6f6f6;
-            width: 100%;
-        }
-    </style>
-</head>
+    {% extends "home.html" %}
 
-<body>
+    {% block content %}
     <h1> This is all our leads </h1>
     {% for lead in leads %}
     <div class="leads">
-       <a href="/leads/lead_detail/{{lead.pk}}/"> {{lead.first_name}} {{lead.last_name}} </a>
+       <a href="{% url 'leads:lead_detail' lead.pk %}"> {{lead.first_name}} {{lead.last_name}} </a>
     </div>
     {% endfor %}
 
@@ -32,7 +18,7 @@
 
     <hr>
     <div class="create_lead">
-        <a href="/leads/lead_create">Create New Lead</a>
+        <a href="{% url 'leads:lead_create' %}">Create New Lead</a>
     </div>
-</body>
-</html>
+
+    {% endblock content%}
