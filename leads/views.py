@@ -56,22 +56,69 @@ def lead_create(request):
     if request.method == "POST":
         form = LeadModelForm(request.POST)
         if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            age = form.cleaned_data['age']
-            agent = form.cleaned_data['agent']
+            # first_name = form.cleaned_data['first_name']
+            # last_name = form.cleaned_data['last_name']
+            # age = form.cleaned_data['age']
+            # agent = form.cleaned_data['agent']
             
             # create the lead to the database
-            Lead.objects.create(
-                first_name=first_name,
-                last_name=last_name,
-                age=age,
-                agent=agent
-            )
-            
+            # Lead.objects.create(
+            #     first_name=first_name,
+            #     last_name=last_name,
+            #     age=age,
+            #     agent=agent
+            # )
+            form.save()
             # redirect back to the lead list
             return redirect('/leads/lead_list')
     context = {
         "form": form
     }
     return render(request, 'leads/lead_create.html', context)
+
+#BEST WAY OF UPDATING
+def lead_update(request, pk):
+    lead = Lead.objects.get(id=pk) # specific lead we want to update
+    form = LeadModelForm(instance=lead) # form we want to edit
+    
+    # check request if it post
+    if request.method == "POST":
+        form = LeadModelForm(request.POST, instance=lead)
+        if form.is_valid():
+            form.save()
+            return redirect('/leads/lead_list')
+    context = {
+        "form" : form,
+        "lead" : lead
+    }
+    return render(request, 'leads/lead_update.html', context)
+
+# OLD WAY OF UPDATING A LEAD
+# def lead_update(request, pk):
+#     lead = Lead.objects.get(id=pk)
+#     form = LeadModelForm()
+#     if request.method == "POST":
+#         form = LeadModelForm(request.POST)
+#         if form.is_valid():
+#             first_name = form.cleaned_data['first_name']
+#             last_name = form.cleaned_data['last_name']
+#             age = form.cleaned_data['age']
+#             agent = form.cleaned_data['agent']
+            
+#             # Replacing the old file with the current file gotten form the post data
+#             lead.first_name = first_name
+#             lead.last_name = last_name
+#             lead.age = age
+#             lead.agent = agent
+            
+#             # save the lead
+#             lead.save()
+#             # redirect the after submitting to lead list
+#             return redirect('/leads/lead_list')
+            
+#     context = {
+#         "form": form,
+#         "lead": lead
+#     }
+#     return render(request, 'leads/lead_update.html', context)
+def lead_delete

@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<h3> Update Lead </h3>
+{{lead.first_name}}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">update</button>
+</form>
+
+<hr>
+<a href="/leads/lead_detail/{{lead.pk}}"> Lead detail </a>
+{% endblock content%}
