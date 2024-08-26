@@ -2,17 +2,40 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from .models import Agent, Lead
 from .forms import LeadForm, LeadModelForm
+from django.views.generic import TemplateView, ListView
 # Create your views here.
 
+class LandingPageView(TemplateView):
+    template_name = "landing_page.html"
+    
+#FUUNCTION BASE VIEW
 
-def lead_list(request):
-    leads = Lead.objects.all()
+# def landing_page(request):
+#     return render(request, 'landing_page.html')
 
-    context = {
-        "leads": leads,
-    }
-    return render(request, 'leads/lead_home.html', context)
 
+class LeadListView(ListView):
+    
+    template_name = "leads/lead_home.html"
+    queryset = Lead.objects.all()
+    context_object_name = "leads"
+
+
+
+# def lead_list(request):
+#     leads = Lead.objects.all()
+
+#     context = {
+#         "leads": leads,
+#     }
+#     return render(request, 'leads/lead_home.html', context)
+
+class LeadDetailView(DetailView):
+    template_name = "leads/lead_details.html"
+    queryset = Lead.objects.all()
+    context_object_name = "lead"
+
+#FUUNCTION BASE VIEW
 def lead_detail(request, pk):
     lead = Lead.objects.get(id=pk)
     context = {
